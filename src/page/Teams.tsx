@@ -91,7 +91,7 @@ export default function TeamsPage() {
         </h1>
         <p className="text-lg max-w-xl mx-auto opacity-90 leading-relaxed">
           The passionate people behind Anomali Caffee — each bringing unique
-          expertise to craft an exceptional experience for our customers.
+          expertise to craft an exceptional experience for our customers
         </p>
       </section>
 

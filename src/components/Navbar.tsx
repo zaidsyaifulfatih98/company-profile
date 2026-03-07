@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
       {/* Logo */}
       <div className="flex items-center gap-2.5 text-[1.4rem] font-bold text-white">
         <img src={Logo} alt="Anomali Coffe" className="bg-white h-10 w-auto" />
-        <span>Anomali Caffee</span>
+        <span>Anomali Coffee</span>
       </div>
 
       {/* Nav links */}

@@ -9,7 +9,7 @@ const Footer: React.FC = () => (
 
       {/* Brand */}
       <div>
-        <h4 className="text-white text-[1.2rem] font-semibold mb-4">Anomali Caffe</h4>
+        <h4 className="text-white text-[1.2rem] font-semibold mb-4">Anomali Coffe</h4>
         <p className="text-white text-[0.98rem] leading-relaxed">
           Tempat nongkrong dan produk kopi kekinian dengan suasana nyaman dan biji kopi pilihan. Selalu menyuguhkan kualitas, rasa, dan pelayanan ramah untuk semua pecinta kopi.
         </p>

@@ -83,12 +83,12 @@ const Home: React.FC = () => (
         alt="Logo CoffeJiwo"
         className="w-40 h-40 mb-6 rounded-lg bg-white shadow-lg object-contain"
         />
-        <h1 className="text-4xl md:text-5xl font-extrabold text-red-800 mb-4">Anomali Caffee</h1>
+        <h1 className="text-4xl md:text-5xl font-extrabold text-red-800 mb-4">Anomali Coffee</h1>
         <p className="tagline text-xl font-bold text-yellow-900 mb-2">
         Kopi Asli Indonesia
         </p>
         <p className="description text-base md:text-lg text-brown-800 opacity-90 mb-8  font-bold">
-        Nikmati pengalaman kopi terbaik bersama Anomali Caffee. Kami hadir untuk pecinta kopi Indonesia dengan cita rasa khas dan pelayanan profesional.
+        Nikmati pengalaman kopi terbaik bersama Anomali Coffee. Kami hadir untuk pecinta kopi Indonesia dengan cita rasa khas dan pelayanan profesional
         </p>
         <div className="hero-buttons flex flex-col sm:flex-row gap-4 justify-center">
         <a
