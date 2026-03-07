@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/company-page"
+      "destination": "/"
     }
   ]
 }
