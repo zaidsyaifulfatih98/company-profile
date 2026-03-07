@@ -70,8 +70,10 @@ export default function CreateBlog() {
                   <div className="text-gray-500 text-sm">{new Date(p.published || "").toLocaleString()}</div>
                 </div>
                 <div>
-                  <button onClick={() => setEditing(p)} className="btn mr-2">Edit</button>
-                  <button onClick={() => deletePost(p.objectId!)} className="btn bg-red-500">Delete</button>
+                  <button onClick={() => setEditing(p)} 
+                    className="btn mr-2 bg-yellow-500 p-2 rounded-md">Edit</button>
+                  <button onClick={() => deletePost(p.objectId!)} 
+                    className="btn bg-red-500 p-2 rounded-md">Delete</button>
                 </div>
               </li>
             ))}

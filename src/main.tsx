@@ -1,6 +1,5 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
 import './style.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './page/page.tsx'
@@ -19,52 +18,49 @@ import CartItemsPage from './page/CartItems.tsx'
 
 
 const router = createBrowserRouter([
+  
   {
-    path: '/',
-    element: <App />,
-  },
-  {
-      path : '/company-page',
+      path : '/',
       Component : Home
     },
     {
-      path : '/company-page/about-us',
+      path : '/about-us',
       Component : AboutUs
     },
     {
-      path : '/company-page/products',
+      path : '/products',
       Component : ProductPageCompany
     },
     {
-      path : '/company-page/blog',
+      path : '/blog',
       Component : BlogPage
     },
     {
-      path : '/company-page/create-blog',
+      path : '/create-blog',
       Component : CreateBlog
     },
     {
-    path: "/company-page/blog/:id",
+    path: "/blog/:id",
     element: <BlogDetails />,
     },
     {
-      path : '/company-page/login',
+      path : '/login',
       Component : LoginPage
     },
     {
-      path : '/company-page/register',
+      path : '/register',
       Component : RegisterPage
     },
     {
-      path : '/company-page/teams',
+      path : '/teams',
       Component : TeamsPage
     },
     {
-      path : '/company-page/products/:id',
+      path : '/products/:id',
       Component : ProductsPageDetail
     },
     {
-      path : '/company-page/cart',
+      path : '/cart',
       Component : CartItemsPage
     },
 ])

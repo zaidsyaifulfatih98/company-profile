@@ -31,16 +31,16 @@ const Navbar: React.FC = () => {
         ref={navLinksRef}
         id="navLinks"
       >
-        <Link to="/company-page" className={linkClass(location.pathname === "/company-page")}>Home</Link>
-        <Link to="/company-page/about-us" className={linkClass(location.pathname === "/company-page/about-us")}>About Us</Link>
-        <Link to="/company-page/products" className={linkClass(location.pathname === "/company-page/products")}>Products</Link>
-        <Link to="/company-page/teams" className={linkClass(location.pathname === "/company-page/teams")}>Teams</Link>
-        <Link to="/company-page/blog" className={linkClass(location.pathname === "/company-page/blog")}>Blog</Link>
+        <Link to="/" className={linkClass(location.pathname === "/")}>Home</Link>
+        <Link to="/about-us" className={linkClass(location.pathname === "/about-us")}>About Us</Link>
+        <Link to="/products" className={linkClass(location.pathname === "/products")}>Products</Link>
+        <Link to="/teams" className={linkClass(location.pathname === "/teams")}>Teams</Link>
+        <Link to="/blog" className={linkClass(location.pathname === "/blog")}>Blog</Link>
         {!isAuthenticated ? (
-          <Link to="/company-page/login" className={linkClass(location.pathname === "/company-page/login")}>Login</Link>
+          <Link to="/login" className={linkClass(location.pathname === "/login")}>Login</Link>
         ) : (
           <>
-            <Link to="/company-page/create-blog" className={linkClass(location.pathname === "/company-page/create-blog")}>Create Blog</Link>
+            <Link to="/create-blog" className={linkClass(location.pathname === "/create-blog")}>Create Blog</Link>
             <div className="flex items-center gap-3">
               <span className="text-[#fff8e1] font-medium">{user?.name || user?.email}</span>
               <button type="button" className="text-white font-medium hover:text-[#eac784] transition-colors duration-300" onClick={logout}>Logout</button>
@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
         )}
 
         {/* Cart icon */}
-        <Link to="/company-page/cart" className="relative hidden md:flex items-center text-white hover:text-[#eac784] transition-colors duration-300">
+        <Link to="/cart" className="relative hidden md:flex items-center text-white hover:text-[#eac784] transition-colors duration-300">
           <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m12-9l2 9M9 21a1 1 0 100-2 1 1 0 000 2zm6 0a1 1 0 100-2 1 1 0 000 2z" />
           </svg>
@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile right: Cart + Hamburger */}
       <div className="flex md:hidden items-center gap-3">
-        <Link to="/company-page/cart" className="relative flex items-center text-white hover:text-[#eac784] transition-colors duration-300">
+        <Link to="/cart" className="relative flex items-center text-white hover:text-[#eac784] transition-colors duration-300">
           <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m12-9l2 9M9 21a1 1 0 100-2 1 1 0 000 2zm6 0a1 1 0 100-2 1 1 0 000 2z" />
           </svg>

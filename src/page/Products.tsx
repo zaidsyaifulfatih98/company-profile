@@ -42,7 +42,7 @@ export default function ProductPageCompany() {
             <section className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 px-4 md:px-20 py-10 gap-3'>
                 {products.map((item, index: number) => (
                     <div key={item.objectId || index} className='bg-white rounded-lg overflow-hidden flex flex-col shadow-sm'>
-                        <Link to={`/company-page/products/${item.objectId}`} className="block">
+                        <Link to={`/products/${item.objectId}`} className="block">
                         <div className='h-[180px] overflow-hidden'>
                             <img
                                 className='w-full h-full object-cover hover:scale-105 transition-transform duration-200'
