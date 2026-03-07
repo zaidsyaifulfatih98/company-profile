@@ -1,0 +1,42 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  margin: 0;
+  background: #faf9f6;
+}
+
+/* Mobile nav toggle — controlled by useMobileMenu hook via classList */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none !important;
+    position: absolute;
+    right: 0;
+    top: 65px;
+    background: #2d1c09;
+    flex-direction: column;
+    padding: 20px;
+    width: 240px;
+    z-index: 99;
+    box-shadow: 0 5px 20px #8c6f49dd;
+    border-radius: 0 0 0 8px;
+    gap: 4px !important;
+  }
+  .nav-links.active {
+    display: flex !important;
+  }
+  .nav-links a,
+  .nav-links button,
+  .nav-links span {
+    padding: 10px 4px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    width: 100%;
+  }
+  .nav-links a:last-child,
+  .nav-links button:last-child {
+    border-bottom: none;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
