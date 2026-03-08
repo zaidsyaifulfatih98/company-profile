@@ -29,7 +29,7 @@ export default function CartItems() {
             <span className="text-7xl">🛒</span>
             <p className="text-lg">Keranjang kamu masih kosong.</p>
             <Link
-              to="/company-page/products"
+              to="/products"
               className="mt-2 px-6 py-2 bg-[#77100f] text-white rounded-lg font-medium hover:bg-[#5c0c0b] transition"
             >
               Mulai Belanja
