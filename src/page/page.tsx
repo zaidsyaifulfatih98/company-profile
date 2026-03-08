@@ -92,7 +92,7 @@ const Home: React.FC = () => (
         </p>
         <div className="hero-buttons flex flex-col sm:flex-row gap-4 justify-center">
         <a
-            href="https://wa.me/6281234567890?text=Halo%20Anomali%20Coffee,%20saya%20ingin%20reservasi"
+            href="https://wa.me/6281234567890?text=Halo%20Anomali%20Coffee,%20saya%20ingin%20bertanya"
             className="btn-primary flex items-center gap-2 px-15 py-3 bg-red-800 text-white font-semibold rounded-full shadow transition hover:bg-yellow-600"
             target="_blank"
             rel="noopener noreferrer"
