@@ -14,7 +14,7 @@ export default function CartItems() {
   const handleCheckout = () => {
     alert(`Checkout berhasil!\nTotal: Rp${totalPrice.toLocaleString('id-ID')}\nTerima kasih telah berbelanja di Anomali Caffee!`);
     clearCart();
-    navigate('/company-page/products');
+    navigate('/products');
   };
 
   return (
@@ -45,7 +45,7 @@ export default function CartItems() {
                   className="flex gap-4 bg-white rounded-xl shadow-sm border border-gray-100 p-4"
                 >
                   {/* Product image */}
-                  <Link to={`/company-page/products/${item.id}`} className="flex-shrink-0">
+                  <Link to={`/products/${item.id}`} className="flex-shrink-0">
                     <img
                       src={item.imageurl}
                       alt={item.name}
@@ -55,7 +55,7 @@ export default function CartItems() {
 
                   {/* Info */}
                   <div className="flex-1 min-w-0">
-                    <Link to={`/company-page/products/${item.id}`}>
+                    <Link to={`/products/${item.id}`}>
                       <h3 className="font-semibold text-gray-800 text-sm leading-snug line-clamp-2 hover:text-[#77100f] transition">
                         {item.name}
                       </h3>
@@ -138,7 +138,7 @@ export default function CartItems() {
                 </button>
 
                 <Link
-                  to="/company-page/products"
+                  to="/products"
                   className="block text-center mt-3 text-sm text-[#77100f] hover:underline"
                 >
                   ← Lanjut Belanja
