@@ -24,7 +24,7 @@ export default function Blog() {
         <h2 className="text-2xl mb-4 font-bold">Blog Feeds</h2>
         <div className="grid gap-4">
           {posts.map(post => (
-            <Link key={post.objectId} to={`/company-page/blog/${post.objectId}`}>
+            <Link key={post.objectId} to={`/blog/${post.objectId}`}>
               <div className="border rounded px-4 py-3 hover:bg-gray-100">
                 <div className="font-bold">{post.title}</div>
                 <div className="text-sm text-gray-600">By {post.author} | {new Date(post.published).toLocaleString()}</div>

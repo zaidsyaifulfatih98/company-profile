@@ -161,7 +161,7 @@ const Home: React.FC = () => (
       {/* More Products */}
       <div className="flex justify-end mt-8">
         <a
-          href="/company-page/products"
+          href="/products"
           className="text-white text-xl font-bold hover:text-yellow-300 transition"
         >
           More Products {'>>'}

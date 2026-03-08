@@ -64,9 +64,10 @@ export default function CreateBlog() {
         <div className="mt-8">
           <ul>
             {posts.map(p => (
-              <li key={p.objectId} className="border-b py-2 flex justify-between">
-                <div>
-                  <strong>{p.title}</strong> by {p.author}
+              <li key={p.objectId} className="border-b py-2 flex justify-between gap-4">
+                <div className="min-w-0 flex-1">
+                  <strong className="block truncate">{p.title}</strong>
+                  <span className="text-sm"> by {p.author}</span>
                   <div className="text-gray-500 text-sm">{new Date(p.published || "").toLocaleString()}</div>
                 </div>
                 <div>
