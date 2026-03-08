@@ -70,7 +70,7 @@ const LoginPage: React.FC = () => {
                 </button>
 
                 <Link
-                  to="/company-page/register"
+                  to="/register"
                   className="block w-full mt-3 py-2 text-center border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-50 transition"
                 >
                   Register

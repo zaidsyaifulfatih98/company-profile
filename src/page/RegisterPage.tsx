@@ -96,7 +96,7 @@ const RegisterPage: React.FC = () => {
           </button>
 
           <Link
-            to="/company-page/login"
+            to="/login"
             className="block w-full mt-3 py-2 text-center border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-50 transition"
           >
             Already have an account? Login
