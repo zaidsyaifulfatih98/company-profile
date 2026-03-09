@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar"
-import image1 from '../assets/about1.jpg'
-import image2 from '../assets/about2.jpg'
+import image1 from '../assets/about1.webp'
+import image2 from '../assets/about2.webp'
 import Footer from "../components/Footer"
 
 export default function AboutUs (){

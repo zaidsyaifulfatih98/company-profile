@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer';
 import kopi1 from "../assets/kopi1.jpg"
-import produk1 from "../assets/produk1.jpg"
-import produk2 from "../assets/produk2.jpg"
-import produk3 from "../assets/produk3.jpg"
-import hero1 from "../assets/hero1.jpg"
-import hero2 from "../assets/hero2.jpg"
-import hero3 from "../assets/hero3.jpg"
+import hero1 from "../assets/hero1.webp"
+import hero2 from "../assets/hero2.webp"
+import hero3 from "../assets/hero3.webp"
+import { useProductsBackendless } from './useProductsCompany';
+import { ensureCompanyBackendless, TestimonyStore, type TestimonyRecord } from '../lib/backendless';
+import { Link } from 'react-router-dom';
 
 
 type Testimony = {
@@ -37,23 +37,27 @@ const testimonies: Testimony[] = [
     message: `“Kopinya enak dan rasanya konsisten, favorite pilihan keluarga. Lebih mantap lagi belinya pas promo 2/2 dapat harga setengah dari normal. Semoga Anomali Coffee tetap jaya dan banyak promo.”`,
   },
 ];
-const products = [
-  {
-    img: produk1,
-    title: 'Anomali Coffee Biji Kopi Susu Blend',
-    flavor: 'Dark Chocolate, Caramel, Fresh Butter',
-  },
-  {
-    img: produk2,
-    title: 'Anomali Coffee Papua Lembah Kamu',
-    flavor: 'Dark Chocolate, Coconut, Mapple Syrup',
-  },
-  {
-    img: produk3,
-    title: 'Anomali Coffee Biji Kopi Bali Kintamani 1KG',
-    flavor: 'Orange, Vanilla, Dark Chocolate',
-  },
-];
+function useHomeProductRatings() {
+  const [ratings, setRatings] = useState<Record<string, number>>({});
+  useEffect(() => {
+    ensureCompanyBackendless();
+    (TestimonyStore.find({ properties: ['productObjectId', 'rating'] }) as Promise<TestimonyRecord[]>)
+      .then((list) => {
+        const map: Record<string, number[]> = {};
+        list.forEach((t) => {
+          if (!map[t.productObjectId]) map[t.productObjectId] = [];
+          map[t.productObjectId].push(t.rating);
+        });
+        const avg: Record<string, number> = {};
+        Object.entries(map).forEach(([pid, vals]) => {
+          avg[pid] = Math.round((vals.reduce((s, v) => s + v, 0) / vals.length) * 10) / 10;
+        });
+        setRatings(avg);
+      })
+      .catch(() => {});
+  }, []);
+  return ratings;
+}
 
 const heroSlides = [
   {
@@ -93,6 +97,8 @@ function StarIcons({ count = 5 }: { count?: number }) {
 
 const Home: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { products, loading: productsLoading } = useProductsBackendless();
+  const ratings = useHomeProductRatings();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -214,28 +220,55 @@ const Home: React.FC = () => {
         <div className="w-32 h-1 bg-white rounded-full"></div>
       </div>
       {/* Product Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-        {products.map((prod, idx) => (
-          <div key={idx} className="bg-[#eaeaea] rounded-2xl shadow-lg overflow-hidden flex flex-col items-center py-6 px-4">
-            <img
-              src={prod.img}
-              alt={prod.title}
-              className="w-full h-60 object-cover rounded-lg mb-4"
-            />
-            <h3 className="text-black text-xl font-bold text-center mb-3">{prod.title}</h3>
-            <span className="text-black text-lg font-semibold mb-2">Flavor :</span>
-            <p className="text-black text-base text-center">{prod.flavor}</p>
-          </div>
-        ))}
-      </div>
+      {productsLoading ? (
+        <div className="flex justify-center py-10">
+          <div className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 p-8 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {products.slice(0, 3).map((prod) => (
+            <Link
+              key={prod.objectId}
+              to={`/products/${prod.objectId}`}
+              className="group bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300"
+            >
+              <div className="h-48 overflow-hidden">
+                <img
+                  src={prod.imageurl}
+                  alt={prod.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="p-3 flex flex-col flex-1">
+                <h3 className="text-sm font-bold text-[#2d1a1a] line-clamp-2 leading-snug mb-2 group-hover:text-[#77100f] transition-colors">
+                  {prod.name}
+                </h3>
+                <p className="text-[#77100f] font-bold text-sm mb-1">
+                  Rp{prod.price.toLocaleString('id-ID')}
+                </p>
+                <div className="flex items-center gap-1 text-xs">
+                  {prod.objectId && ratings[prod.objectId] !== undefined ? (
+                    <>
+                      <span className="text-yellow-400 text-base">★</span>
+                      <span className="font-semibold text-gray-700">{ratings[prod.objectId].toFixed(1)}</span>
+                    </>
+                  ) : (
+                    <span className="text-gray-400">Belum ada ulasan</span>
+                  )}
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
       {/* More Products */}
       <div className="flex justify-end mt-8">
-        <a
-          href="/products"
+        <Link
+          to="/products"
           className="text-white text-xl font-bold hover:text-yellow-300 transition"
         >
           More Products {'>>'}
-        </a>
+        </Link>
       </div>
     </div>
   </section>
