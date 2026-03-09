@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer';
-import logo from "../assets/logo.jpg"
 import kopi1 from "../assets/kopi1.jpg"
 import produk1 from "../assets/produk1.jpg"
 import produk2 from "../assets/produk2.jpg"
 import produk3 from "../assets/produk3.jpg"
+import hero1 from "../assets/hero1.jpg"
+import hero2 from "../assets/hero2.jpg"
+import hero3 from "../assets/hero3.jpg"
 
 
 type Testimony = {
@@ -53,6 +55,24 @@ const products = [
   },
 ];
 
+const heroSlides = [
+  {
+    img: hero1,
+    title: "Handcrafted, Humble and Honest",
+    subtitle: "Donuts that taste as real as the hands that made them.",
+  },
+  {
+    img: hero2,
+    title: "Fresh Every Day",
+    subtitle: "Made with love, served with passion.",
+  },
+  {
+    img: hero3,
+    title: "Taste the Difference",
+    subtitle: "Premium ingredients, crafted for you.",
+  },
+];
+
 // Komponen bintang rating
 function StarIcons({ count = 5 }: { count?: number }) {
   return (
@@ -71,41 +91,88 @@ function StarIcons({ count = 5 }: { count?: number }) {
   );
 }
 
-const Home: React.FC = () => (
+const Home: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 35000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const prevSlide = () =>
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  const nextSlide = () =>
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+
+  return (
   <div>
     <Navbar />
-    {/* Hero Section */}
-<section className="hero min-h-screen flex items-center justify-center bg-gradient-to-br from-[#b68b43] via-[#b68b43] to-[#fff8ec]">
-    
-  <div className="hero-content flex flex-col items-center text-center w-full max-w-3xl px-4 py-12">
-        <img
-        src={logo}
-        alt="Logo CoffeJiwo"
-        className="w-40 h-40 mb-6 rounded-lg bg-white shadow-lg object-contain"
-        />
-        <h1 className="text-4xl md:text-5xl font-extrabold text-red-800 mb-4">Anomali Coffee</h1>
-        <p className="tagline text-xl font-bold text-yellow-900 mb-2">
-        Kopi Asli Indonesia
-        </p>
-        <p className="description text-base md:text-lg text-brown-800 opacity-90 mb-8  font-bold">
-        Nikmati pengalaman kopi terbaik bersama Anomali Coffee. Kami hadir untuk pecinta kopi Indonesia dengan cita rasa khas dan pelayanan profesional
-        </p>
-        <div className="hero-buttons flex flex-col sm:flex-row gap-4 justify-center">
-        <a
-            href="https://wa.me/6281234567890?text=Halo%20Anomali%20Coffee,%20saya%20ingin%20bertanya"
-            className="btn-primary flex items-center gap-2 px-15 py-3 bg-red-800 text-white font-semibold rounded-full shadow transition hover:bg-yellow-600"
-            target="_blank"
-            rel="noopener noreferrer"
+
+    {/* Hero Section — Image Carousel */}
+    <section className="relative w-full overflow-hidden" style={{ height: '560px' }}>
+      {heroSlides.map((slide, idx) => (
+        <div
+          key={idx}
+          className="absolute inset-0 transition-opacity duration-700"
+          style={{ opacity: currentSlide === idx ? 1 : 0, zIndex: currentSlide === idx ? 10 : 0 }}
         >
-            <i className="fab fa-whatsapp"></i> Hubungi Kami
-        </a>
-        
+          <img
+            src={slide.img}
+            alt={slide.title}
+            className="w-full h-full object-cover"
+          />
+          {/* Dark overlay */}
+          <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.38)' }} />
+          {/* Text overlay */}
+          <div className="absolute inset-0 flex flex-col justify-center px-10 md:px-20">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-white max-w-xl leading-tight mb-4 drop-shadow-lg">
+              {slide.title}
+            </h1>
+            <p className="text-base md:text-lg text-white/90 max-w-md drop-shadow">
+              {slide.subtitle}
+            </p>
+          </div>
         </div>
-    </div>
-    <div className="scroll-indicator absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <i className="fas fa-chevron-down text-yellow-600 text-2xl animate-bounce"></i>
-    </div>
-</section>
+      ))}
+
+      {/* Prev Arrow */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 rounded-full text-white text-2xl font-bold transition"
+        style={{ background: 'rgba(255,255,255,0.25)' }}
+        aria-label="Previous slide"
+      >
+        &#8249;
+      </button>
+
+      {/* Next Arrow */}
+      <button
+        onClick={nextSlide}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 rounded-full text-white text-2xl font-bold transition"
+        style={{ background: 'rgba(255,255,255,0.25)' }}
+        aria-label="Next slide"
+      >
+        &#8250;
+      </button>
+
+      {/* Dot Indicators */}
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+        {heroSlides.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrentSlide(idx)}
+            className="w-3 h-3 rounded-full transition-all duration-300"
+            style={{
+              background: currentSlide === idx ? '#fff' : 'rgba(255,255,255,0.4)',
+              transform: currentSlide === idx ? 'scale(1.3)' : 'scale(1)',
+            }}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
+      </div>
+    </section>
 
     <section className="flex flex-col md:flex-row items-start md:items-center justify-center md:justify-start gap-8 px-4 py-12 md:py-16 bg-white">
     {/* Left: Image */}
@@ -119,7 +186,10 @@ const Home: React.FC = () => (
     {/* Right: Content */}
     <div className="w-full md:w-3/5 flex flex-col items-start">
       {/* Title */}
-      <h1 className="text-3xl mb-5 md:text-4xl font-bold text-[#7e2727] mb-8 self-start">Our Company</h1>
+      <h1 className="text-3xl  md:text-4xl font-bold text-[#7e2727] mb-3 self-center">Our Company</h1>
+      
+      <div className="w-32 h-1 bg-red-800 rounded-full self-center mb-7"></div>
+      
       {/* Company Description */}
       <p className="text-center mt-5 md:text-left text-black font-semibold mb-7">
         Establish in 2007, Anomali Coffee is a coffee roaster company providing coffee with specialty <br />
@@ -209,6 +279,7 @@ const Home: React.FC = () => (
     {/* Footer */}
     <Footer />
   </div>
-);
+  );
+};
 
 export default Home;
