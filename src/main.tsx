@@ -14,8 +14,12 @@ import TeamsPage from './page/Teams.tsx'
 import ProductsPageDetail from './page/ProductsPageDetail.tsx'
 import CartItemsPage from './page/CartItems.tsx'
 
-
-
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
+  }
+}
 
 const router = createBrowserRouter([
   
@@ -64,6 +68,17 @@ const router = createBrowserRouter([
       Component : CartItemsPage
     },
 ])
+
+// Track SPA page views on every route change
+router.subscribe((state) => {
+  if (state.navigation.state === 'idle' && typeof window.gtag === 'function') {
+    window.gtag('event', 'page_view', {
+      page_location: window.location.href,
+      page_path: state.location.pathname + state.location.search,
+      page_title: document.title,
+    });
+  }
+});
 
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
